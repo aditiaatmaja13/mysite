@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ name }}'s CV</title>
+</head>
+<body>
+    <h1>{{ name }}</h1>
+    <p>Email: {{ email }}</p>
+    <p>Phone: {{ phone }}</p>
+    <p>LinkedIn: <a href="https://{{ linkedin }}">{{ linkedin }}</a></p>
+
+    <h2>Education</h2>
+    <ul>
+        {% for edu in education %}
+        <li>
+            <strong>{{ edu.institution }}</strong>, {{ edu.location }}<br>
+            {{ edu.degree }}<br>
+            {% if edu.expected_graduation %}
+                Expected Graduation: {{ edu.expected_graduation }}<br>
+            {% else %}
+                Graduation: {{ edu.graduation }}<br>
+            {% endif %}
+            Courses: {{ edu.courses|join:", " }}
+        </li>
+        {% endfor %}
+    </ul>
+
+    <h2>Technical Skills</h2>
+    <ul>
+        <li><strong>Programming Languages:</strong> {{ technical_skills.programming_languages|join:", " }}</li>
+        <li><strong>Domains:</strong> {{ technical_skills.domains|join:", " }}</li>
+        <li><strong>Certifications:</strong> {{ technical_skills.certifications|join:", " }}</li>
+    </ul>
+
+    <h2>Experience</h2>
+    <ul>
+        {% for exp in experience %}
+        <li>
+            <strong>{{ exp.role }}</strong> at {{ exp.company }}, {{ exp.location }}<br>
+            {{ exp.duration }}<br>
+            {% for detail in exp.details %}
+            - {{ detail }}<br>
+            {% endfor %}
+        </li>
+        {% endfor %}
+    </ul>
+
+    <h2>Publications</h2>
+    <ul>
+        {% for pub in publications %}
+        <li>
+            <strong>{{ pub.title }}</strong><br>
+            Published in: {{ pub.published_in }}<br>
+            {{ pub.details }}
+        </li>
+        {% endfor %}
+    </ul>
+
+    <h2>Leadership</h2>
+    <ul>
+        {% for leader in leadership %}
+        <li>
+            <strong>{{ leader.title }}</strong>, {{ leader.organization }} ({{ leader.location }})<br>
+            {{ leader.details }}
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
